@@ -1,4 +1,5 @@
 Summary:	Complex Graphical Design/Layout Engine
+Summary(pl):	Z³o¿ony silnik graficznego projektowania/planowania
 Name:		edje
 Version:	0.5.0
 %define	_snap	20050105
@@ -31,30 +32,54 @@ image data and configuration information without requiring them to do
 so. This separation and simplistic event driven style of programming
 can produce almost any look and feel one could want for basic visual
 elements. Anything more complex is likely the domain of an application
-or widget set that may use Edje as a conveneient way of being able to
+or widget set that may use Edje as a convenient way of being able to
 configure parts of the display.
 
+%description -l pl
+Edje to z³o¿ony silnik graficznego projektowania i planowania.
+Dostarcza mechanizm pozwalaj±cy na definiowanie elementów graficznych
+za pomoc± danych konfiguracyjnych poprzez rozmieszczenie, zachowanie i
+wygl±d. Edje pozwala na wiele kolekcji projektów w jednym pliku,
+zezwalaj±c na istnienie pe³nego zbioru obrazów, animacji i kontrolek
+jako ca³o¶ci.
+
+Edje oddziela rozmieszczenie, wygl±d i logikê zachowania na ró¿ne,
+niezale¿ne elementy. Pozwala to na wspó³dzielenie danych obrazów i
+informacji o konfiguracji elementów graficznych bez wymagania tego.
+Rozdzielenie to i uproszczony model programowania sterowanego
+zdarzeniami mo¿e stworzyæ prawie dowolny wygl±d i zachowanie
+podstawowych elementów graficznych. Wszystko bardziej z³o¿one jest
+raczej domen± aplikacji lub zbioru widgetów, które mog± u¿ywaæ Edje
+jako wygodnego sposobu konfigurowania czê¶ci ekranu.
+
 %package devel
-Summary:	Edje headers, documentation and test programs
+Summary:	Edje header files
+Summary(pl):	Pliki nag³ówkowe Edje
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	ecore-devel
 Requires:	embryo-devel
 Requires:	imlib2-devel
 
 %description devel
-Headers, static libraries, test programs and documentation for Edje
+Header files for Edje.
+
+%description devel -l pl
+Pliki nag³ówkowe Edje.
 
 %package static
-Summary:	Static libraries
+Summary:	Static Edje libraries
+Summary(pl):	Statyczne biblioteki Edje
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static libraries.
+Static Edje libraries.
+
+%description static -l pl
+Statyczne biblioteki Edje.
 
 %prep
-#%%setup -q
 %setup -q -n %{name}
 
 %build
@@ -68,6 +93,7 @@ Static libraries.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -80,16 +106,16 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING README
-%attr(755,root,root) %{_libdir}/libedje.so.*
 %attr(755,root,root) %{_bindir}/edje
 %attr(755,root,root) %{_bindir}/edje_*
+%attr(755,root,root) %{_libdir}/libedje.so.*.*.*
 %{_datadir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/edje-config
 %attr(755,root,root) %{_libdir}/libedje.so
 %{_libdir}/libedje.la
-%attr(755,root,root) %{_bindir}/edje-config
 %{_includedir}/Edje*
 %{_pkgconfigdir}/edje.pc
 
