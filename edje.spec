@@ -68,16 +68,16 @@ Header files for Edje.
 Pliki nag³ówkowe Edje.
 
 %package static
-Summary:	Static Edje libraries
-Summary(pl):	Statyczne biblioteki Edje
+Summary:	Static Edje library
+Summary(pl):	Statyczna biblioteka Edje
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static Edje libraries.
+Static Edje library.
 
 %description static -l pl
-Statyczne biblioteki Edje.
+Statyczna biblioteka Edje.
 
 %prep
 %setup -q -n %{name}
