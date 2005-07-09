@@ -2,13 +2,13 @@ Summary:	Complex Graphical Design/Layout Engine
 Summary(pl):	Z³o¿ony silnik graficznego projektowania/planowania
 Name:		edje
 Version:	0.5.0
-%define	_snap	20050329
+%define	_snap	20050701
 Release:	0.%{_snap}.0.1
 License:	BSD
 Group:		X11/Libraries
 #Source0:	http://dl.sourceforge.net/enlightenment/%{name}-%{version}.tar.gz
-Source0:	ftp://ftp.sparky.homelinux.org/pub/e17/%{name}-%{_snap}.tar.gz
-# Source0-md5:	b0dc6477404655a14fa5aa14de9d3048
+Source0:	ftp://ftp.sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.gz
+# Source0-md5:	94cd1aabb9fc7785123fb4d92255f85e
 URL:		http://enlightenment.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
