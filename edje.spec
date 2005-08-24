@@ -1,21 +1,18 @@
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl):	Z³o¿ony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.5.0
-%define	_snap	20050701
-Release:	0.%{_snap}.0.1
+Version:	0.5.0.013
+Release:	1
 License:	BSD
 Group:		X11/Libraries
-#Source0:	http://dl.sourceforge.net/enlightenment/%{name}-%{version}.tar.gz
-Source0:	http://sparky.homelinux.org/snaps/enli/e17/libs/%{name}-%{_snap}.tar.gz
-# Source0-md5:	94cd1aabb9fc7785123fb4d92255f85e
+Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
+# Source0-md5:	1e5829e8c784770da2ccbd57ef55714c
 URL:		http://enlightenment.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	ecore-devel
 BuildRequires:	embryo-devel
-BuildRequires:	imlib2-devel
-BuildRequires:	libltdl-devel
+BuildRequires:	imlib2-devel >= 1.2.1
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,7 +56,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ecore-devel
 Requires:	embryo-devel
-Requires:	imlib2-devel
+Requires:	imlib2-devel >= 1.2.1
 
 %description devel
 Header files for Edje.
@@ -80,11 +77,11 @@ Static Edje library.
 Statyczna biblioteka Edje.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 %{__libtoolize}
-%{__aclocal} -I m4
+%{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
