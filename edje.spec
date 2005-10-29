@@ -15,6 +15,8 @@ BuildRequires:	ecore-devel
 BuildRequires:	embryo-devel
 BuildRequires:	imlib2-devel >= 1.2.1
 BuildRequires:	libtool
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	fonts-TTF-bitstream-vera
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,11 +52,22 @@ podstawowych elementów graficznych. Wszystko bardziej z³o¿one jest
 raczej domen± aplikacji lub zbioru widgetów, które mog± u¿ywaæ Edje
 jako wygodnego sposobu konfigurowania czê¶ci ekranu.
 
+%package libs
+Summary:	Edje library
+Summary(pl):	Biblioteka edje
+Group:		X11/Libraries
+
+%description libs
+Edje library.
+
+%description libs -l pl
+Biblioteka edje.
+
 %package devel
 Summary:	Edje header files
 Summary(pl):	Pliki nag³ówkowe Edje
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 Requires:	ecore-devel
 Requires:	embryo-devel
 Requires:	imlib2-devel >= 1.2.1
@@ -97,19 +110,29 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+cd $RPM_BUILD_ROOT%{_datadir}/%{name}/data/test/fonts
+VERA=$(ls Vera*.ttf)
+for FONT in $VERA; do
+	rm -f $FONT
+	ln -s %{_fontsdir}/TTF/$FONT .
+done
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post libs	-p /sbin/ldconfig
+%postun libs	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING COPYING-PLAIN INSTALL README
 %attr(755,root,root) %{_bindir}/edje
 %attr(755,root,root) %{_bindir}/edje_*
-%attr(755,root,root) %{_libdir}/libedje.so.*.*.*
 %{_datadir}/%{name}
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libedje.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
