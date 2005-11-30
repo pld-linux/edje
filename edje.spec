@@ -1,12 +1,16 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# don't build static library
+#
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl):	Z³o¿ony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.5.0.019
+Version:	0.5.0.020
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	a36bb943ca60b97255dec75b386aef00
+# Source0-md5:	4992e0280cdabcb265685738d45406d9
 Patch0:		%{name}-missing_m4.patch
 URL:		http://enlightenment.org/Libraries/Edje/
 BuildRequires:	autoconf
@@ -102,6 +106,7 @@ Statyczna biblioteka Edje.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{!?with_static_libs:--disable-static} \
 	--enable-edje-cc
 %{__make}
 
@@ -143,6 +148,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/Edje*
 %{_pkgconfigdir}/edje.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libedje.a
+%endif
