@@ -5,13 +5,13 @@
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl):	Z³o¿ony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.5.0.020
+Version:	0.5.0.022
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	4992e0280cdabcb265685738d45406d9
-Patch0:		%{name}-missing_m4.patch
+# Source0-md5:	50240dda4705fe765f948b26bc5d257a
+#Patch0:		%{name}-missing_m4.patch
 URL:		http://enlightenment.org/Libraries/Edje/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -23,6 +23,8 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
 Requires:	fonts-TTF-bitstream-vera
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%undefine	__cxx
 
 %description
 Edje is a complex graphical design and layout engine. It provides a
@@ -97,14 +99,14 @@ Statyczna biblioteka Edje.
 
 %prep
 %setup -q
-%patch0 -p1
+#%%patch0 -p1
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
+#%%{__libtoolize}
+#%%{__aclocal}
+#%%{__autoconf}
+#%%{__autoheader}
+#%%{__automake}
 %configure \
 	%{!?with_static_libs:--disable-static} \
 	--enable-edje-cc
