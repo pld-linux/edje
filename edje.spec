@@ -24,6 +24,8 @@ Requires:	fonts-TTF-bitstream-vera
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx
+%define		specflags_x86_64	-mfpmath=387
+%define		specflags_amd64		-mfpmath=387
 
 %description
 Edje is a complex graphical design and layout engine. It provides a
