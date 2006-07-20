@@ -20,6 +20,8 @@ BuildRequires:	imlib2-devel >= 1.2.1
 BuildRequires:	libtool
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
+Requires:	evas-engine-buffer
+Requires:	evas-loader-png
 Requires:	fonts-TTF-bitstream-vera
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
