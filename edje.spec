@@ -5,12 +5,12 @@
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl):	Z³o¿ony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.5.0.031
+Version:	0.5.0.032
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	30d1affcb66a153ff9e87c4aba257eb4
+# Source0-md5:	9d0350eb2139831c5889a050d28d5647
 URL:		http://enlightenment.org/Libraries/Edje/
 BuildRequires:	autoconf
 BuildRequires:	automake
