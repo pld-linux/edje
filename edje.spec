@@ -5,12 +5,12 @@
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl):	Z³o¿ony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.5.0.032
+Version:	0.5.0.036
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	9d0350eb2139831c5889a050d28d5647
+# Source0-md5:	a954b46597cdf09560beac8d28e4155e
 URL:		http://enlightenment.org/Libraries/Edje/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -22,7 +22,6 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
 Requires:	evas-engine-buffer
 Requires:	evas-loader-png
-Requires:	fonts-TTF-bitstream-vera
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx
@@ -104,6 +103,11 @@ Statyczna biblioteka Edje.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	%{!?with_static_libs:--disable-static} \
 	--enable-edje-cc
@@ -115,13 +119,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-cd $RPM_BUILD_ROOT%{_datadir}/%{name}/data/test/fonts
-VERA=$(ls Vera*.ttf)
-for FONT in $VERA; do
-	rm -f $FONT
-	ln -s %{_fontsdir}/TTF/$FONT .
-done
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -131,8 +128,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING COPYING-PLAIN INSTALL README
-%attr(755,root,root) %{_bindir}/edje
-%attr(755,root,root) %{_bindir}/edje_*
+%attr(755,root,root) %{_bindir}/edje_cc
+%attr(755,root,root) %{_bindir}/edje_decc
+%attr(755,root,root) %{_bindir}/edje_recc
 %{_datadir}/%{name}
 
 %files libs
