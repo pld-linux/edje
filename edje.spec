@@ -3,7 +3,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Complex Graphical Design/Layout Engine
-Summary(pl.UTF-8):   Złożony silnik graficznego projektowania/planowania
+Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
 Version:	0.5.0.036
 Release:	2
@@ -63,7 +63,7 @@ jako wygodnego sposobu konfigurowania części ekranu.
 
 %package libs
 Summary:	Edje library
-Summary(pl.UTF-8):   Biblioteka edje
+Summary(pl.UTF-8):	Biblioteka edje
 Group:		X11/Libraries
 
 %description libs
@@ -74,7 +74,7 @@ Biblioteka edje.
 
 %package devel
 Summary:	Edje header files
-Summary(pl.UTF-8):   Pliki nagłówkowe Edje
+Summary(pl.UTF-8):	Pliki nagłówkowe Edje
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	ecore-devel
@@ -89,7 +89,7 @@ Pliki nagłówkowe Edje.
 
 %package static
 Summary:	Static Edje library
-Summary(pl.UTF-8):   Statyczna biblioteka Edje
+Summary(pl.UTF-8):	Statyczna biblioteka Edje
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
