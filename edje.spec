@@ -3,7 +3,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Complex Graphical Design/Layout Engine
-Summary(pl):	Z≥oøony silnik graficznego projektowania/planowania
+Summary(pl.UTF-8):   Z≈Ço≈ºony silnik graficznego projektowania/planowania
 Name:		edje
 Version:	0.5.0.036
 Release:	2
@@ -44,37 +44,37 @@ elements. Anything more complex is likely the domain of an application
 or widget set that may use Edje as a convenient way of being able to
 configure parts of the display.
 
-%description -l pl
-Edje to z≥oøony silnik graficznego projektowania i planowania.
-Dostarcza mechanizm pozwalaj±cy na definiowanie elementÛw graficznych
-za pomoc± danych konfiguracyjnych poprzez rozmieszczenie, zachowanie i
-wygl±d. Edje pozwala na wiele kolekcji projektÛw w jednym pliku,
-zezwalaj±c na istnienie pe≥nego zbioru obrazÛw, animacji i kontrolek
-jako ca≥o∂ci.
+%description -l pl.UTF-8
+Edje to z≈Ço≈ºony silnik graficznego projektowania i planowania.
+Dostarcza mechanizm pozwalajƒÖcy na definiowanie element√≥w graficznych
+za pomocƒÖ danych konfiguracyjnych poprzez rozmieszczenie, zachowanie i
+wyglƒÖd. Edje pozwala na wiele kolekcji projekt√≥w w jednym pliku,
+zezwalajƒÖc na istnienie pe≈Çnego zbioru obraz√≥w, animacji i kontrolek
+jako ca≈Ço≈õci.
 
-Edje oddziela rozmieszczenie, wygl±d i logikÍ zachowania na rÛøne,
-niezaleøne elementy. Pozwala to na wspÛ≥dzielenie danych obrazÛw i
-informacji o konfiguracji elementÛw graficznych bez wymagania tego.
+Edje oddziela rozmieszczenie, wyglƒÖd i logikƒô zachowania na r√≥≈ºne,
+niezale≈ºne elementy. Pozwala to na wsp√≥≈Çdzielenie danych obraz√≥w i
+informacji o konfiguracji element√≥w graficznych bez wymagania tego.
 Rozdzielenie to i uproszczony model programowania sterowanego
-zdarzeniami moøe stworzyÊ prawie dowolny wygl±d i zachowanie
-podstawowych elementÛw graficznych. Wszystko bardziej z≥oøone jest
-raczej domen± aplikacji lub zbioru widgetÛw, ktÛre mog± uøywaÊ Edje
-jako wygodnego sposobu konfigurowania czÍ∂ci ekranu.
+zdarzeniami mo≈ºe stworzyƒá prawie dowolny wyglƒÖd i zachowanie
+podstawowych element√≥w graficznych. Wszystko bardziej z≈Ço≈ºone jest
+raczej domenƒÖ aplikacji lub zbioru widget√≥w, kt√≥re mogƒÖ u≈ºywaƒá Edje
+jako wygodnego sposobu konfigurowania czƒô≈õci ekranu.
 
 %package libs
 Summary:	Edje library
-Summary(pl):	Biblioteka edje
+Summary(pl.UTF-8):   Biblioteka edje
 Group:		X11/Libraries
 
 %description libs
 Edje library.
 
-%description libs -l pl
+%description libs -l pl.UTF-8
 Biblioteka edje.
 
 %package devel
 Summary:	Edje header files
-Summary(pl):	Pliki nag≥Ûwkowe Edje
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe Edje
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	ecore-devel
@@ -84,19 +84,19 @@ Requires:	imlib2-devel >= 1.2.1
 %description devel
 Header files for Edje.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe Edje.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe Edje.
 
 %package static
 Summary:	Static Edje library
-Summary(pl):	Statyczna biblioteka Edje
+Summary(pl.UTF-8):   Statyczna biblioteka Edje
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static Edje library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka Edje.
 
 %prep
