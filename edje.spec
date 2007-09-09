@@ -5,23 +5,26 @@
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.5.0.036
-Release:	3
+Version:	0.5.0.038
+Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	a954b46597cdf09560beac8d28e4155e
+# Source0-md5:	9ad7ffd1c18e150f483e4a3d9b24dac3
 URL:		http://enlightenment.org/Libraries/Edje/
 BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	ecore-devel
-BuildRequires:	embryo-devel
-BuildRequires:	imlib2-devel >= 1.2.1
+BuildRequires:	automake >= 1.4
+# ecore-evas, ecore-job
+BuildRequires:	ecore-devel >= 0.9.9.038
+BuildRequires:	eet-devel >= 0.9.10.038
+BuildRequires:	embryo-devel >= 0.9.1.038
+BuildRequires:	evas-devel >= 0.9.9.038
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
-Requires:	evas-engine-buffer
-Requires:	evas-loader-png
+Requires:	evas-engine-buffer >= 0.9.9.038
+Requires:	evas-loader-png >= 0.9.9.038
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx
@@ -65,6 +68,11 @@ jako wygodnego sposobu konfigurowania części ekranu.
 Summary:	Edje library
 Summary(pl.UTF-8):	Biblioteka edje
 Group:		X11/Libraries
+Requires:	ecore-evas >= 0.9.9.038
+Requires:	ecore-job >= 0.9.9.038
+Requires:	eet >= 0.9.10.038
+Requires:	embryo >= 0.9.1.038
+Requires:	evas >= 0.9.9.038
 
 %description libs
 Edje library.
@@ -77,9 +85,11 @@ Summary:	Edje header files
 Summary(pl.UTF-8):	Pliki nagłówkowe Edje
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	ecore-devel
-Requires:	embryo-devel
-Requires:	imlib2-devel >= 1.2.1
+# ecore-evas, ecore-job
+Requires:	ecore-devel >= 0.9.9.038
+Requires:	eet-devel >= 0.9.10.038
+Requires:	embryo-devel >= 0.9.1.038
+Requires:	evas-devel >= 0.9.9.038
 
 %description devel
 Header files for Edje.
@@ -99,18 +109,31 @@ Static Edje library.
 %description static -l pl.UTF-8
 Statyczna biblioteka Edje.
 
+%package -n vim-syntax-edc
+Summary:	EDC syntax support for Vim
+Summary(pl.UTF-8):	Obsługa składni EDC dla Vima
+Group:		Applications/Editors/Vim
+Requires:	vim-rt
+
+%description -n vim-syntax-edc
+EDC syntax support for Vim.
+
+%description -n vim-syntax-edc -l pl.UTF-8
+Obsługa składni EDC dla Vima.
+
 %prep
 %setup -q
 
 %build
 %{__libtoolize}
-%{__aclocal} -I m4
+%{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
 	%{!?with_static_libs:--disable-static} \
-	--enable-edje-cc
+	--enable-edje-cc \
+	--with-vim=/usr/share/vim/vimfiles
 %{__make}
 
 %install
@@ -119,15 +142,17 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -D data/edc.vim $RPM_BUILD_ROOT/usr/share/vim/vimfiles/syntax/edc.vim
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post libs	-p /sbin/ldconfig
-%postun libs	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING COPYING-PLAIN INSTALL README
+%doc AUTHORS COPYING COPYING-PLAIN README
 %attr(755,root,root) %{_bindir}/edje_cc
 %attr(755,root,root) %{_bindir}/edje_decc
 %attr(755,root,root) %{_bindir}/edje_recc
@@ -142,7 +167,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/edje-config
 %attr(755,root,root) %{_libdir}/libedje.so
 %{_libdir}/libedje.la
-%{_includedir}/Edje*
+%{_includedir}/Edje.h
 %{_pkgconfigdir}/edje.pc
 
 %if %{with static_libs}
@@ -150,3 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libedje.a
 %endif
+
+%files -n vim-syntax-edc
+%defattr(644,root,root,755)
+/usr/share/vim/vimfiles/syntax/edc.vim
