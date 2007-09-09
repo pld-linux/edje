@@ -11,7 +11,7 @@ License:	BSD
 Group:		X11/Libraries
 Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
 # Source0-md5:	9ad7ffd1c18e150f483e4a3d9b24dac3
-URL:		http://enlightenment.org/Libraries/Edje/
+URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
 # ecore-evas, ecore-job
