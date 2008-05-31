@@ -2,6 +2,11 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
+%define		ecore_ver	0.9.9.038
+%define		eet_ver 	0.9.10.038
+%define		embryo_ver	0.9.1.038
+%define		evas_ver	0.9.9.038
+
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
@@ -15,16 +20,16 @@ URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
 # ecore-evas, ecore-job
-BuildRequires:	ecore-devel >= 0.9.9.038
-BuildRequires:	eet-devel >= 0.9.10.038
-BuildRequires:	embryo-devel >= 0.9.1.038
-BuildRequires:	evas-devel >= 0.9.9.038
+BuildRequires:	ecore-devel >= %{ecore_ver}
+BuildRequires:	eet-devel >= %{eet_ver}
+BuildRequires:	embryo-devel >= %{embryo_ver}
+BuildRequires:	evas-devel >= %{evas_ver}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
-Requires:	evas-engine-buffer >= 0.9.9.038
-Requires:	evas-loader-png >= 0.9.9.038
+Requires:	evas-engine-buffer >= %{evas_ver}
+Requires:	evas-loader-png >= %{evas_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx
@@ -68,11 +73,11 @@ jako wygodnego sposobu konfigurowania części ekranu.
 Summary:	Edje library
 Summary(pl.UTF-8):	Biblioteka edje
 Group:		X11/Libraries
-Requires:	ecore-evas >= 0.9.9.038
-Requires:	ecore-job >= 0.9.9.038
-Requires:	eet >= 0.9.10.038
-Requires:	embryo >= 0.9.1.038
-Requires:	evas >= 0.9.9.038
+Requires:	ecore-evas >= %{ecore_ver}
+Requires:	ecore-job >= %{ecore_ver}
+Requires:	eet >= %{eet_ver}
+Requires:	embryo >= %{embryo_ver}
+Requires:	evas >= %{evas_ver}
 
 %description libs
 Edje library.
@@ -86,10 +91,10 @@ Summary(pl.UTF-8):	Pliki nagłówkowe Edje
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 # ecore-evas, ecore-job
-Requires:	ecore-devel >= 0.9.9.038
-Requires:	eet-devel >= 0.9.10.038
-Requires:	embryo-devel >= 0.9.1.038
-Requires:	evas-devel >= 0.9.9.038
+Requires:	ecore-devel >= %{ecore_ver}
+Requires:	eet-devel >= %{eet_ver}
+Requires:	embryo-devel >= %{embryo_ver}
+Requires:	evas-devel >= %{evas_ver}
 
 %description devel
 Header files for Edje.
