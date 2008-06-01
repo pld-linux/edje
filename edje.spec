@@ -2,20 +2,20 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	0.9.9.038
-%define		eet_ver 	0.9.10.038
-%define		embryo_ver	0.9.1.038
-%define		evas_ver	0.9.9.038
+%define		ecore_ver	0.9.9.043
+%define		eet_ver 	1.0.1
+%define		embryo_ver	0.9.9.043
+%define		evas_ver	0.9.9.043
 
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.5.0.038
+Version:	0.9.9.043
 Release:	1
 License:	BSD
 Group:		X11/Libraries
-Source0:	http://enlightenment.freedesktop.org/files/%{name}-%{version}.tar.gz
-# Source0-md5:	9ad7ffd1c18e150f483e4a3d9b24dac3
+Source0:	http://download.enlightenment.org/snapshots/2008-05-19/%{name}-%{version}.tar.bz2
+# Source0-md5:	1aa16cb2a2e32d2dd9b7c46b8dcfd7a3
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4
@@ -165,14 +165,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libedje.so.*.*.*
+%attr(755,root,root) %{_libdir}/libedje.so.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/edje-config
 %attr(755,root,root) %{_libdir}/libedje.so
 %{_libdir}/libedje.la
-%{_includedir}/Edje.h
+%{_includedir}/Edje*.h
 %{_pkgconfigdir}/edje.pc
 
 %if %{with static_libs}
