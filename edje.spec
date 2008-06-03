@@ -17,10 +17,10 @@ Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/snapshots/2008-05-19/%{name}-%{version}.tar.bz2
 # Source0-md5:	1aa16cb2a2e32d2dd9b7c46b8dcfd7a3
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
-BuildRequires:	autoconf
-BuildRequires:	automake >= 1.4
+BuildRequires:	autoconf >= 2.52
+BuildRequires:	automake >= 1.6
 # ecore-evas, ecore-job
-BuildRequires:	ecore-devel >= %{ecore_ver}
+BuildRequires:	ecore-evas-devel >= %{ecore_ver}
 BuildRequires:	eet-devel >= %{eet_ver}
 BuildRequires:	embryo-devel >= %{embryo_ver}
 BuildRequires:	evas-devel >= %{evas_ver}
@@ -91,7 +91,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe Edje
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 # ecore-evas, ecore-job
-Requires:	ecore-devel >= %{ecore_ver}
+Requires:	ecore-evas-devel >= %{ecore_ver}
 Requires:	eet-devel >= %{eet_ver}
 Requires:	embryo-devel >= %{embryo_ver}
 Requires:	evas-devel >= %{evas_ver}
@@ -165,7 +165,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libedje.so.*
+%attr(755,root,root) %{_libdir}/libedje.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libedje.so.0
 
 %files devel
 %defattr(644,root,root,755)
