@@ -2,20 +2,21 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	0.9.9.043
-%define		eet_ver 	1.0.1
-%define		embryo_ver	0.9.9.043
-%define		evas_ver	0.9.9.043
+%define		_snap	20080813
+%define		ecore_ver	0.9.9.044
+%define		eet_ver 	1.0.2
+%define		embryo_ver	0.9.9.044
+%define		evas_ver	0.9.9.044
 
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.9.9.043
-Release:	1
+Version:	0.9.9.044
+Release:	0.%{_snap}.1
 License:	BSD
 Group:		X11/Libraries
-Source0:	http://download.enlightenment.org/snapshots/2008-05-19/%{name}-%{version}.tar.bz2
-# Source0-md5:	1aa16cb2a2e32d2dd9b7c46b8dcfd7a3
+Source0:	%{name}-%{version}-%{_snap}.tar.bz2
+# Source0-md5:	40344474043bcab9a7e1f1dc2d344745
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -127,7 +128,7 @@ EDC syntax support for Vim.
 Obsługa składni EDC dla Vima.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{_snap}
 
 %build
 %{__libtoolize}
