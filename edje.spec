@@ -127,7 +127,7 @@ EDC syntax support for Vim.
 Obsługa składni EDC dla Vima.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 %{__libtoolize}
