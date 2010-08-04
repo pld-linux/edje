@@ -2,20 +2,21 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	0.9.9.050
-%define		eet_ver 	1.1.0
-%define		embryo_ver	0.9.9.050
-%define		evas_ver	0.9.9.050
-
+%define		ecore_ver	0.9.9.49898
+%define		eet_ver 	1.3.2
+%define		embryo_ver	0.9.9.49898
+%define		evas_ver	0.9.9.49898
+%define		snapdate	2010-06-27
+%define		svn		-ver-svn-06
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.9.9.050
+Version:	0.9.99.49898
 Release:	0.1
-License:	BSD
+License:	LGPL v2.1
 Group:		X11/Libraries
-Source0:	http://download.enlightenment.org/snapshots/2008-09-25/%{name}-%{version}.tar.bz2
-# Source0-md5:	99859588331588bacb778ed3c95acdb0
+Source0:	http://download.enlightenment.org/snapshots/%{snapdate}/%{name}-%{version}.tar.bz2
+# Source0-md5:	1d66a41dbdb5f7b7567064f28386e906
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -74,7 +75,6 @@ Summary:	Edje library
 Summary(pl.UTF-8):	Biblioteka edje
 Group:		X11/Libraries
 Requires:	ecore-evas >= %{ecore_ver}
-Requires:	ecore-job >= %{ecore_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	embryo >= %{embryo_ver}
 Requires:	evas >= %{evas_ver}
@@ -131,7 +131,7 @@ Obsługa składni EDC dla Vima.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -139,7 +139,7 @@ Obsługa składni EDC dla Vima.
 	%{!?with_static_libs:--disable-static} \
 	--enable-edje-cc \
 	--with-vim=/usr/share/vim/vimfiles
-%{__make}
+%{__make} V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -147,6 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_libdir}/edje
 install -D data/edc.vim $RPM_BUILD_ROOT/usr/share/vim/vimfiles/syntax/edc.vim
 
 %clean
@@ -160,14 +161,17 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING COPYING-PLAIN README
 %attr(755,root,root) %{_bindir}/edje_cc
 %attr(755,root,root) %{_bindir}/edje_decc
+%attr(755,root,root) %{_bindir}/edje_player
 %attr(755,root,root) %{_bindir}/edje_recc
 %attr(755,root,root) %{_bindir}/inkscape2edc
+%dir %{_libdir}/%{name}
 %{_datadir}/%{name}
+%{_datadir}/mime/packages/edje.xml
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libedje.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libedje.so.0
+%attr(755,root,root) %{_libdir}/libedje%{svn}.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libedje%{svn}.so.0
 
 %files devel
 %defattr(644,root,root,755)
