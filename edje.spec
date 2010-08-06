@@ -6,7 +6,6 @@
 %define		eet_ver 	1.3.2
 %define		embryo_ver	0.9.9.49898
 %define		evas_ver	0.9.9.49898
-%define		snapdate	2010-06-27
 %define		svn		-ver-svn-06
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
@@ -15,7 +14,7 @@ Version:	0.9.99.49898
 Release:	0.1
 License:	LGPL v2.1
 Group:		X11/Libraries
-Source0:	http://download.enlightenment.org/snapshots/%{snapdate}/%{name}-%{version}.tar.bz2
+Source0:	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.tar.bz2
 # Source0-md5:	1d66a41dbdb5f7b7567064f28386e906
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf >= 2.52
