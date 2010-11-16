@@ -2,20 +2,21 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	0.9.9.49898
-%define		eet_ver 	1.3.2
-%define		embryo_ver	0.9.9.49898
-%define		evas_ver	0.9.9.49898
-%define		svn		-ver-svn-06
+%define		ecore_ver	1.0.0
+%define		eet_ver 	1.4.0
+%define		embryo_ver	1.0.0
+%define		evas_ver	1.0.0
+%define		svn		%{nil}
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	0.9.99.49898
-Release:	0.1
+%define	subver	beta2
+Version:	1.0.0
+Release:	0.%{subver}.1
 License:	LGPL v2.1
 Group:		X11/Libraries
-Source0:	http://download.enlightenment.org/snapshots/LATEST/%{name}-%{version}.tar.bz2
-# Source0-md5:	1d66a41dbdb5f7b7567064f28386e906
+Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.%{subver}.tar.bz2
+# Source0-md5:	7538edb5e6a5801502f9d7e831a250c6
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -126,7 +127,7 @@ EDC syntax support for Vim.
 Obsługa składni EDC dla Vima.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}.%{subver}
 
 %build
 %{__libtoolize}
@@ -157,7 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING COPYING-PLAIN README
+%doc AUTHORS COPYING NEWS README
 %attr(755,root,root) %{_bindir}/edje_cc
 %attr(755,root,root) %{_bindir}/edje_decc
 %attr(755,root,root) %{_bindir}/edje_player
@@ -170,13 +171,14 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libedje%{svn}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libedje%{svn}.so.0
+%attr(755,root,root) %ghost %{_libdir}/libedje%{svn}.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libedje.so
 %{_libdir}/libedje.la
-%{_includedir}/Edje*.h
+%dir %{_includedir}/edje-1
+%{_includedir}/edje-1/*.h
 %{_pkgconfigdir}/edje.pc
 
 %if %{with static_libs}
