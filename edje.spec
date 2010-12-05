@@ -6,27 +6,31 @@
 %define		eet_ver 	1.4.0
 %define		embryo_ver	1.0.0
 %define		evas_ver	1.0.0
-%define		svn		%{nil}
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-%define	subver	beta2
+%define	subver	beta3
 Version:	1.0.0
 Release:	0.%{subver}.1
-License:	LGPL v2.1
+License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.%{subver}.tar.bz2
-# Source0-md5:	7538edb5e6a5801502f9d7e831a250c6
+# Source0-md5:	b87c3a339a08de305c4f30c4a9834d31
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
-# ecore-evas, ecore-job
+BuildRequires:	ecore-devel >= %{ecore_ver}
 BuildRequires:	ecore-evas-devel >= %{ecore_ver}
+BuildRequires:	ecore-file-devel >= %{ecore_ver}
+BuildRequires:	ecore-imf-devel >= %{ecore_ver}
+BuildRequires:	ecore-imf-evas-devel >= %{ecore_ver}
 BuildRequires:	eet-devel >= %{eet_ver}
 BuildRequires:	embryo-devel >= %{embryo_ver}
 BuildRequires:	evas-devel >= %{evas_ver}
 BuildRequires:	libtool
-BuildRequires:	pkgconfig
+BuildRequires:	lua51 >= 5.1.0
+BuildRequires:	pkgconfig >= 1:0.22
+BuildRequires:	python >= 1:2.5
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
 Requires:	evas-engine-buffer >= %{evas_ver}
@@ -74,7 +78,10 @@ jako wygodnego sposobu konfigurowania części ekranu.
 Summary:	Edje library
 Summary(pl.UTF-8):	Biblioteka edje
 Group:		X11/Libraries
-Requires:	ecore-evas >= %{ecore_ver}
+Requires:	ecore >= %{ecore_ver}
+Requires:	ecore-file >= %{ecore_ver}
+Requires:	ecore-imf >= %{ecore_ver}
+Requires:	ecore-imf-evas >= %{ecore_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	embryo >= %{embryo_ver}
 Requires:	evas >= %{evas_ver}
@@ -90,8 +97,10 @@ Summary:	Edje header files
 Summary(pl.UTF-8):	Pliki nagłówkowe Edje
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-# ecore-evas, ecore-job
-Requires:	ecore-evas-devel >= %{ecore_ver}
+Requires:	ecore-devel >= %{ecore_ver}
+Requires:	ecore-file-devel >= %{ecore_ver}
+Requires:	ecore-imf-devel >= %{ecore_ver}
+Requires:	ecore-imf-evas-devel >= %{ecore_ver}
 Requires:	eet-devel >= %{eet_ver}
 Requires:	embryo-devel >= %{embryo_ver}
 Requires:	evas-devel >= %{evas_ver}
@@ -136,10 +145,11 @@ Obsługa składni EDC dla Vima.
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
 	--enable-edje-cc \
 	--with-vim=/usr/share/vim/vimfiles
-%{__make} V=1
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -158,9 +168,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS COPYING README
 %attr(755,root,root) %{_bindir}/edje_cc
+%attr(755,root,root) %{_bindir}/edje_convert
 %attr(755,root,root) %{_bindir}/edje_decc
+%attr(755,root,root) %{_bindir}/edje_external_inspector
+%attr(755,root,root) %{_bindir}/edje_inspector
 %attr(755,root,root) %{_bindir}/edje_player
 %attr(755,root,root) %{_bindir}/edje_recc
 %attr(755,root,root) %{_bindir}/inkscape2edc
@@ -170,15 +183,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libedje%{svn}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libedje%{svn}.so.1
+%attr(755,root,root) %{_libdir}/libedje.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libedje.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libedje.so
 %{_libdir}/libedje.la
-%dir %{_includedir}/edje-1
-%{_includedir}/edje-1/*.h
+%{_includedir}/edje-1
 %{_pkgconfigdir}/edje.pc
 
 %if %{with static_libs}
