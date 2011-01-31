@@ -9,13 +9,12 @@
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-%define	subver	beta3
 Version:	1.0.0
-Release:	0.%{subver}.1
+Release:	1
 License:	BSD
 Group:		X11/Libraries
-Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.%{subver}.tar.bz2
-# Source0-md5:	b87c3a339a08de305c4f30c4a9834d31
+Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
+# Source0-md5:	ce0fdc6c02bc6d6d99b798c27d1d9466
 URL:		http://enlightenment.org/p.php?p=about/libs/edje
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -136,7 +135,7 @@ EDC syntax support for Vim.
 Obsługa składni EDC dla Vima.
 
 %prep
-%setup -q -n %{name}-%{version}.%{subver}
+%setup -q
 
 %build
 %{__libtoolize}
