@@ -10,7 +10,7 @@ Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
 Version:	1.0.0
-Release:	2
+Release:	3
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
@@ -157,7 +157,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libdir}/edje
-install -D data/edc.vim $RPM_BUILD_ROOT/usr/share/vim/vimfiles/syntax/edc.vim
+install -D data/edc.vim $RPM_BUILD_ROOT%{_datadir}/vim/vimfiles/syntax/edc.vim
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -169,7 +169,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING README
 %attr(755,root,root) %{_bindir}/edje_cc
-%attr(755,root,root) %{_bindir}/edje_convert
 %attr(755,root,root) %{_bindir}/edje_decc
 %attr(755,root,root) %{_bindir}/edje_external_inspector
 %attr(755,root,root) %{_bindir}/edje_inspector
@@ -200,4 +199,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n vim-syntax-edc
 %defattr(644,root,root,755)
-/usr/share/vim/vimfiles/syntax/edc.vim
+%{_datadir}/vim/vimfiles/syntax/edc.vim
