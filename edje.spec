@@ -2,19 +2,20 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	1.0.0
-%define		eet_ver 	1.4.0
-%define		embryo_ver	1.0.0
-%define		evas_ver	1.0.0
+%define		ecore_ver	1.1.0
+%define		eet_ver 	1.5.0
+%define		eina_ver	1.1.0
+%define		embryo_ver	1.1.0
+%define		evas_ver	1.1.0
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	1.0.1
+Version:	1.1.0
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	36e5f22e76304ada5d19baee2a38a61a
+# Source0-md5:	c51cbc0c0d8f93ceadfb2173c2f9135c
 URL:		http://trac.enlightenment.org/e/wiki/Edje
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -23,6 +24,7 @@ BuildRequires:	ecore-evas-devel >= %{ecore_ver}
 BuildRequires:	ecore-file-devel >= %{ecore_ver}
 BuildRequires:	ecore-imf-devel >= %{ecore_ver}
 BuildRequires:	ecore-imf-evas-devel >= %{ecore_ver}
+BuildRequires:	eina-devel >= %{eina_ver}
 BuildRequires:	eet-devel >= %{eet_ver}
 BuildRequires:	embryo-devel >= %{embryo_ver}
 BuildRequires:	evas-devel >= %{evas_ver}
@@ -31,7 +33,7 @@ BuildRequires:	lua51 >= 5.1.0
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	python >= 1:2.5
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	cpp
+Requires:	eina >= %{eina_ver}
 Requires:	evas-engine-buffer >= %{evas_ver}
 Requires:	evas-loader-png >= %{evas_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -81,6 +83,7 @@ Requires:	ecore >= %{ecore_ver}
 Requires:	ecore-file >= %{ecore_ver}
 Requires:	ecore-imf >= %{ecore_ver}
 Requires:	ecore-imf-evas >= %{ecore_ver}
+Requires:	eina-devel >= %{eina_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	embryo >= %{embryo_ver}
 Requires:	evas >= %{evas_ver}
@@ -167,7 +170,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog README
+%doc AUTHORS COPYING ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/edje_cc
 %attr(755,root,root) %{_bindir}/edje_decc
 %attr(755,root,root) %{_bindir}/edje_external_inspector
@@ -176,6 +179,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/edje_recc
 %attr(755,root,root) %{_bindir}/inkscape2edc
 %dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/utils
+%attr(755,root,root) %dir %{_libdir}/%{name}/utils/epp
 %{_datadir}/%{name}
 %{_datadir}/mime/packages/edje.xml
 
