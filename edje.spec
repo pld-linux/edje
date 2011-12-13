@@ -159,7 +159,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_libdir}/edje
+install -d $RPM_BUILD_ROOT%{_libdir}/edje/modules
 install -D data/edc.vim $RPM_BUILD_ROOT%{_datadir}/vim/vimfiles/syntax/edc.vim
 
 %clean
@@ -178,7 +178,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/edje_player
 %attr(755,root,root) %{_bindir}/edje_recc
 %attr(755,root,root) %{_bindir}/inkscape2edc
-%dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/utils
 %attr(755,root,root) %dir %{_libdir}/%{name}/utils/epp
 %{_datadir}/%{name}
@@ -188,6 +187,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libedje.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libedje.so.1
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/modules
 
 %files devel
 %defattr(644,root,root,755)
