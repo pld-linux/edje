@@ -11,11 +11,12 @@ Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
 # Source0-md5:	c51cbc0c0d8f93ceadfb2173c2f9135c
+Patch0:		automake.patch
 URL:		http://trac.enlightenment.org/e/wiki/Edje
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -139,6 +140,7 @@ Obsługa składni EDC dla Vima.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
