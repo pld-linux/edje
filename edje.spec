@@ -11,7 +11,7 @@ Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
 Version:	1.1.0
-Release:	2
+Release:	3
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
@@ -84,7 +84,7 @@ Requires:	ecore >= %{ecore_ver}
 Requires:	ecore-file >= %{ecore_ver}
 Requires:	ecore-imf >= %{ecore_ver}
 Requires:	ecore-imf-evas >= %{ecore_ver}
-Requires:	eina-devel >= %{eina_ver}
+Requires:	eina >= %{eina_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	embryo >= %{embryo_ver}
 Requires:	evas >= %{evas_ver}
