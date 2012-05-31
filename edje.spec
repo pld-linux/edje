@@ -1,23 +1,26 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
+%bcond_without	remix		# remix support
 #
-%define		ecore_ver	1.1.0
-%define		eet_ver 	1.5.0
-%define		eina_ver	1.1.0
-%define		embryo_ver	1.1.0
-%define		evas_ver	1.1.0
+%define		ecore_ver	1.2.0
+%define		eet_ver 	1.6.0
+%define		eina_ver	1.2.0
+%define		embryo_ver	1.2.0
+%define		evas_ver	1.2.0
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	1.1.0
-Release:	3
+Version:	1.2.0
+Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	c51cbc0c0d8f93ceadfb2173c2f9135c
-Patch0:		automake.patch
+# Source0-md5:	a83d5a6ec65f135fb33625602ffc4696
+Patch0:		%{name}-deps.patch
 URL:		http://trac.enlightenment.org/e/wiki/Edje
+# for alsa_snd_player plugin for remix
+%{?with_remix:BuildRequires:	alsa-lib-devel >= 1.0.21}
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
 BuildRequires:	ecore-devel >= %{ecore_ver}
@@ -29,14 +32,23 @@ BuildRequires:	eina-devel >= %{eina_ver}
 BuildRequires:	eet-devel >= %{eet_ver}
 BuildRequires:	embryo-devel >= %{embryo_ver}
 BuildRequires:	evas-devel >= %{evas_ver}
+BuildRequires:	flac-devel >= 1.2.1
+BuildRequires:	libogg-devel >= 1:1.1.4
+BuildRequires:	libsndfile-devel >= 1.0.21
+BuildRequires:	libvorbis-devel >= 1:1.2.3
 BuildRequires:	libtool
 BuildRequires:	lua51 >= 5.1.0
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	python >= 1:2.5
+%{?with_remix:BuildRequires:	remix-devel >= 0.2.4}
+%{?with_remix:Requires:	alsa-lib >= 1.0.21}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	eina >= %{eina_ver}
 Requires:	evas-engine-buffer >= %{evas_ver}
 Requires:	evas-loader-png >= %{evas_ver}
+Requires:	flac >= 1.2.1
+Requires:	libogg >= 1:1.1.4
+Requires:	libvorbis >= 1:1.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx
@@ -88,6 +100,8 @@ Requires:	eina >= %{eina_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	embryo >= %{embryo_ver}
 Requires:	evas >= %{evas_ver}
+Requires:	libsndfile >= 1.0.21
+%{?with_remix:Requires:	remix >= 0.2.4}
 
 %description libs
 Edje library.
@@ -107,6 +121,8 @@ Requires:	ecore-imf-evas-devel >= %{ecore_ver}
 Requires:	eet-devel >= %{eet_ver}
 Requires:	embryo-devel >= %{embryo_ver}
 Requires:	evas-devel >= %{evas_ver}
+Requires:	libsndfile-devel >= 1.0.21
+%{?with_remix:Requires:	remix-devel >= 0.2.4}
 
 %description devel
 Header files for Edje.
@@ -150,6 +166,7 @@ Obsługa składni EDC dla Vima.
 %{__automake}
 %configure \
 	--disable-silent-rules \
+	%{!?with_remix:--disable-remix} \
 	%{!?with_static_libs:--disable-static} \
 	--enable-edje-cc \
 	--with-vim=/usr/share/vim/vimfiles
@@ -163,6 +180,11 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libdir}/edje/modules
 install -D data/edc.vim $RPM_BUILD_ROOT%{_datadir}/vim/vimfiles/syntax/edc.vim
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/modules/*/linux-gnu-*/module.la
+%if %{with remix}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/remix/*.la
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -191,6 +213,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libedje.so.1
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/modules
+%dir %{_libdir}/%{name}/modules/multisense_factory
+%dir %{_libdir}/%{name}/modules/multisense_factory/linux-gnu-*
+%attr(755,root,root) %{_libdir}/%{name}/modules/multisense_factory/linux-gnu-*/module.so
+%if %{with remix}
+%attr(755,root,root) %{_libdir}/remix/libalsa_snd_player.so
+%attr(755,root,root) %{_libdir}/remix/libeet_sndfile_reader.so
+%endif
 
 %files devel
 %defattr(644,root,root,755)

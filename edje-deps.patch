@@ -1,0 +1,31 @@
+Don't add packages not required by edje library to edje.pc Requires list
+--- edje-1.2.0/configure.ac.orig	2012-04-26 06:30:28.000000000 +0200
++++ edje-1.2.0/configure.ac	2012-05-30 17:46:44.128074454 +0200
+@@ -373,7 +373,6 @@
+       [
+        AC_DEFINE(HAVE_VORBIS, 1, [vorbis support for Edje])
+        have_vorbis="yes"
+-       requirement_edje="ogg >= 1.1.4 vorbis >= 1.2.3 vorbisenc >= 1.2.3 ${requirement_edje}"
+       ],
+       [have_vorbis="no"; want_multisense="no"]
+    )
+@@ -398,7 +397,6 @@
+       [
+        AC_DEFINE(HAVE_LIBALSA, 1, [ALSA support for Edje])
+        have_alsa_lib="yes"
+-       requirement_edje="alsa >= 1.0.21 ${requirement_edje}"
+       ],
+       [have_alsa_lib="no"; want_multisense="no"]
+    )
+@@ -425,11 +423,6 @@
+       [
+        AC_DEFINE(HAVE_LIBFLAC, 1, [flac support for Edje])
+        have_flac_lib="yes"
+-       # disabled because this adds flac include dirs to cflags... and
+-       # FLAC has an assert.h in its include dirs that ends up
+-       # overriding the system assert.h and thus causes all sorts of
+-       # mayhem
+-       #requirement_edje="flac >= 1.2.1 ${requirement_edje}"
+       ],
+       [have_flac_lib="no"; want_multisense="no"]
+    )
