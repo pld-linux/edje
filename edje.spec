@@ -11,12 +11,12 @@
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	1.2.0
+Version:	1.2.1
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	a83d5a6ec65f135fb33625602ffc4696
+# Source0-md5:	880c390fdc279818bd88e5de1aa50893
 Patch0:		%{name}-deps.patch
 URL:		http://trac.enlightenment.org/e/wiki/Edje
 # for alsa_snd_player plugin for remix
