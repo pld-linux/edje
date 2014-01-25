@@ -4,21 +4,21 @@
 %bcond_without	static_libs	# don't build static library
 %bcond_with	remix		# remix support (not used now as multisense is disabled)
 #
-%define		ecore_ver	1.7.9
-%define		eet_ver 	1.7.9
-%define		eina_ver	1.7.9
-%define		eio_ver		1.7.9
-%define		embryo_ver	1.7.9
-%define		evas_ver	1.7.9
+%define		ecore_ver	1.7.10
+%define		eet_ver 	1.7.10
+%define		eina_ver	1.7.10
+%define		eio_ver		1.7.10
+%define		embryo_ver	1.7.10
+%define		evas_ver	1.7.10
 Summary:	Complex Graphical Design/Layout Engine
 Summary(pl.UTF-8):	Złożony silnik graficznego projektowania/planowania
 Name:		edje
-Version:	1.7.9
+Version:	1.7.10
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	4486344a8c0cd7518148ee635db45820
+# Source0-md5:	edcefc433cb238fa4a5cb5a1bb52bc6e
 Patch0:		%{name}-deps.patch
 URL:		http://trac.enlightenment.org/e/wiki/Edje
 # for alsa_snd_player plugin for remix
